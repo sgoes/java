@@ -30,7 +30,7 @@ public class Consulta {
 			System.out.println("=== Welcome to CINEL White Clinic ====");
 			System.out.println("[1] - Registo de um médico");
 			System.out.println("[2] - Agendar consulta ");
-			System.out.println("[3] - Marcar consulta ");
+			System.out.println("[3] - Listar Consultas ");
 			System.out.println("Insira a sua opção ---->  ");
 			String opcao = scanner.nextLine();
 				switch(opcao) {
@@ -46,10 +46,11 @@ public class Consulta {
 						break;
 					}
 					case "3":{
-						
+							
+						}
 						break;
 							}
 					}
 				}
 			}
-		}
+		

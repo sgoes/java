@@ -1,6 +1,7 @@
 package pacotes;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Cliente {
@@ -16,7 +17,7 @@ public class Cliente {
 	Consulta medico = new  Consulta();
 	
 	// ArrayList para armazenar os dados do cliente
-	static ArrayList<String> dadosCliente = new ArrayList<String>();
+	ArrayList<String> dadosCliente = new ArrayList<String>();
 	
 	// Atributos
 	String nome;
@@ -59,10 +60,5 @@ public class Cliente {
 			System.out.println(dadosCliente.get(i));
 		}
 	}
-	
 
-	
-	
-	
-	
 }

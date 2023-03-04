@@ -1,6 +1,7 @@
 package pacotes;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Medico {
@@ -15,7 +16,7 @@ public class Medico {
 
 	
 	// ArrayList para armazenar os dados do cliente
-	static ArrayList<String> dadosMedico = new ArrayList<String>();
+	ArrayList<String> dadosMedico = new ArrayList<String>();
 	
 	// Atributos
 	private String nomeMedico;
@@ -100,9 +101,10 @@ public class Medico {
 				}else {
 					System.out.println("O médico pretendido não exerce essa especialidade.");
 				}
-
-		
-
 	}
+	
+
+	
+
 	
 }
