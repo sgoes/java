@@ -6,9 +6,6 @@ import java.util.Scanner;
 
 public class Cliente {
 
-	public Cliente() {
-		// TODO Auto-generated constructor stub
-	}
 	//Instanciar o Scanner
 	Scanner scanner = new Scanner(System.in);
 	
@@ -51,7 +48,7 @@ public class Cliente {
 		// Metodo que junta os inputs clientes num array 
 		dadosCliente.add(juntaDadosCliente);
 		
-		System.out.println(dadosCliente);	
+		//System.out.println(dadosCliente);	
 		
 	}
 	

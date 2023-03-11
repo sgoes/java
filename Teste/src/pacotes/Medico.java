@@ -7,14 +7,10 @@ import java.util.Scanner;
 public class Medico {
 
 	public Medico() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	// Instanciar scanner
 	Scanner scanner = new Scanner(System.in); 
-	
-	
-
-	
 	// ArrayList para armazenar os dados do cliente
 	ArrayList<String> dadosMedico = new ArrayList<String>();
 	
@@ -23,32 +19,13 @@ public class Medico {
 	private String NIFMedico;
 	private String especialidade;
 	
+	String nomeCliente;
+	String NIFCliente;
+	String emailCliente;
+	String seguroCliente;
 	
-	
-	public String getNomeMedico() {
-		return nomeMedico;
-	}
 
-	public void setNomeMedico(String nomeMedico) {
-		this.nomeMedico = nomeMedico;
-	}
 
-	public String getNIFMedico() {
-		return NIFMedico;
-	}
-
-	public void setNIFMedico(String nIFMedico) {
-		NIFMedico = nIFMedico;
-	}
-
-	public String getEspecialidade() {
-		return especialidade;
-	}
-
-	public void setEspecialidade(String especialidade) {
-		this.especialidade = especialidade;
-	}
-	
 	// Instanciar objetos de classes
 	Consulta consulta = new Consulta();
 	Cliente cliente = new Cliente();
@@ -69,8 +46,6 @@ public class Medico {
 		dadosMedico.add(juntaDadosMedico);
 		
 		//System.out.println(dadosMedico);
-		
-		
 	}
 	
 	public void MostrarMedicos() {
@@ -95,13 +70,42 @@ public class Medico {
 				String especialidadePrentendida = scanner.nextLine();
 				if(especialidadePrentendida.equals(especialidade) && (nomeMedico.equals(nomeMedicoPretendido))){
 					for(int j = 0; j < dadosMedico.size();) {
-						System.out.println("Consulta agendada.");
 						break;
 				}
 				}else {
 					System.out.println("O médico pretendido não exerce essa especialidade.");
 				}
-	}
+		}
+		
+		public void AgendarConsulta(	String nome, String NIF, String email, String seguro) {
+			this.nomeCliente = nome;
+			this.NIFCliente = NIF;
+			this.emailCliente = email;
+			this.seguroCliente = seguro;
+			
+			String AgendaConsulta = ("Cliente:  \n" + cliente.dadosCliente + "\n A sua consulta está agendada: \n" + dadosMedico );
+			System.out.println(AgendaConsulta);
+			
+		}
+	
+		public String getNomeMedico() {
+			return nomeMedico;
+		}
+		public void setNomeMedico(String nomeMedico) {
+			this.nomeMedico = nomeMedico;
+		}
+		public String getNIFMedico() {
+			return NIFMedico;
+		}
+		public void setNIFMedico(String nIFMedico) {
+			NIFMedico = nIFMedico;
+		}
+		public String getEspecialidade() {
+			return especialidade;
+		}
+		public void setEspecialidade(String especialidade) {
+			this.especialidade = especialidade;
+		}
 	
 
 	

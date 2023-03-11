@@ -1,0 +1,314 @@
+package pacotes;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JList;
+import javax.swing.SwingConstants;
+import javax.swing.JSeparator;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
+
+public class Principal extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textFieldNomeCliente;
+	private final ButtonGroup buttonGroup = new ButtonGroup();
+	
+	//criação do objeto para ligar a classe cliente
+	Clientes novoCliente = new Clientes();
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Principal frame = new Principal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Principal() {
+		setTitle("Clientes - CINEL");
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 740, 300);
+		contentPane = new JPanel();
+		contentPane.setBackground(UIManager.getColor("InternalFrame.inactiveTitleBackground"));
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 724, 22);
+		contentPane.add(menuBar);
+		
+		JMenu mnNewMenu = new JMenu("Ficheiro");
+		menuBar.add(mnNewMenu);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Sair");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				System.exit(0);
+			}
+			
+		});
+		mnNewMenu.add(mntmNewMenuItem);
+		
+		JMenu mnNewMenu_1 = new JMenu("Clientes");
+		menuBar.add(mnNewMenu_1);
+		
+		DefaultListModel<String> listaClientes = new DefaultListModel<String>();
+		
+		JList<String> list = new JList<String>(listaClientes);
+		list.setBounds(414, 66, 278, 172);
+		contentPane.add(list);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Ver dados");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+				if(Clientes.baseDados.size() == 0) 
+				{
+					JOptionPane.showMessageDialog(null, "Não existem dados guardados.");
+				}
+				else
+				{
+					listaClientes.removeAllElements();
+					for(int i = 0 ; i<Clientes.baseDados.size(); i++) 
+					{
+						listaClientes.addElement(Clientes.baseDados.get(i));
+						
+					}
+					
+				}
+				
+
+				
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Localidade");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				int count=0;
+				String opcao = JOptionPane.showInputDialog("Indique a localidade dos clientes que deseja saber o total");
+				
+				for(String linha:Clientes.baseDados) 
+				{
+					
+					
+					if(linha.contains(opcao)) 
+					{
+						count++;
+					}
+				}
+				JOptionPane.showMessageDialog(null, "Existem " + count + " Cliente(s) em " + opcao + " !");
+				
+				
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Total");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				novoCliente.TotalClientesGuardados();
+			}
+		});
+		mnNewMenu_1.add(mntmNewMenuItem_3);
+		
+		JLabel lblNewLabel = new JLabel("Nome Cliente");
+		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNewLabel.setBounds(20, 66, 99, 22);
+		contentPane.add(lblNewLabel);
+		
+		textFieldNomeCliente = new JTextField();
+		textFieldNomeCliente.setBounds(108, 66, 278, 23);
+		contentPane.add(textFieldNomeCliente);
+		textFieldNomeCliente.setColumns(10);
+		
+		JLabel lblLocalidade = new JLabel("Localidade");
+		lblLocalidade.setFont(new Font("Arial", Font.BOLD, 12));
+		lblLocalidade.setBounds(20, 107, 99, 22);
+		contentPane.add(lblLocalidade);
+		
+		JComboBox comboBoxLocalidade = new JComboBox();
+		comboBoxLocalidade.setBackground(SystemColor.controlHighlight);
+		comboBoxLocalidade.setModel(new DefaultComboBoxModel(new String[] {"Escolha uma Opção", "Porto", "Lisboa", "Faro"}));
+		comboBoxLocalidade.setBounds(108, 107, 278, 22);
+		contentPane.add(comboBoxLocalidade);
+		
+		JLabel lblGnero = new JLabel("Gênero");
+		lblGnero.setFont(new Font("Arial", Font.BOLD, 12));
+		lblGnero.setBounds(20, 151, 99, 22);
+		contentPane.add(lblGnero);
+		
+		JRadioButton radioMasculino = new JRadioButton("Masculino");
+		buttonGroup.add(radioMasculino);
+		radioMasculino.setFont(new Font("Arial", Font.PLAIN, 12));
+		radioMasculino.setBounds(108, 151, 86, 23);
+		contentPane.add(radioMasculino);
+		
+		JRadioButton radioFeminino = new JRadioButton("Feminino");
+		buttonGroup.add(radioFeminino);
+		radioFeminino.setFont(new Font("Arial", Font.PLAIN, 12));
+		radioFeminino.setBounds(213, 151, 86, 23);
+		contentPane.add(radioFeminino);
+		
+		JButton btnNewButton = new JButton("Submeter Dados");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				String nome, localidade, genero;
+				
+				if(textFieldNomeCliente.getText().trim().equals("") || comboBoxLocalidade.getSelectedIndex() == 0 ) 
+				{
+					JOptionPane.showMessageDialog(null, "Os campos são de preenchimento obrigatório !");
+				}
+				else if (radioFeminino.isSelected() == false && radioMasculino.isSelected() == false) 
+				{
+					JOptionPane.showMessageDialog(null, "O campo de gênero não foi preenchido");
+				}
+				else 
+				{
+					nome = textFieldNomeCliente.getText();
+					localidade = comboBoxLocalidade.getSelectedItem().toString();
+					
+					if(radioFeminino.isSelected()==true) 
+					{
+						genero = "Feminino";
+					}
+					
+					else 
+					{
+						genero = "Masculino";
+					}
+					
+					JOptionPane.showMessageDialog(null,"Cliente adicionado com sucesso !\n" +  "Nome: " + nome + ". Localidade: " + localidade + ". Gênero: " + genero);
+					
+					novoCliente.GuardarDadosClientes(nome, localidade, genero);
+					
+					textFieldNomeCliente.setText("");
+					
+					comboBoxLocalidade.setSelectedIndex(0);
+					
+					buttonGroup.clearSelection();
+					
+					
+				}
+				
+
+			}
+		});
+		btnNewButton.setFont(new Font("Arial", Font.BOLD, 14));
+		btnNewButton.setBounds(108, 206, 191, 32);
+		contentPane.add(btnNewButton);
+		
+		
+		JLabel lblDadosDosClientes = new JLabel("Dados dos Clientes Guardados");
+		lblDadosDosClientes.setHorizontalAlignment(SwingConstants.CENTER);
+		lblDadosDosClientes.setFont(new Font("Arial", Font.BOLD, 12));
+		lblDadosDosClientes.setBounds(404, 33, 288, 22);
+		contentPane.add(lblDadosDosClientes);
+		
+		JLabel lblInserirNovoCliente = new JLabel("Inserir Novo Cliente");
+		lblInserirNovoCliente.setHorizontalAlignment(SwingConstants.CENTER);
+		lblInserirNovoCliente.setFont(new Font("Arial", Font.BOLD, 12));
+		lblInserirNovoCliente.setBounds(10, 33, 376, 22);
+		contentPane.add(lblInserirNovoCliente);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(20, 53, 366, 2);
+		contentPane.add(separator);
+		
+		JSeparator separator_1 = new JSeparator();
+		separator_1.setBounds(414, 53, 278, 2);
+		contentPane.add(separator_1);
+	}
+}
+
+
+
+
+// Classe Clientes
+
+package pacotes;
+
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
+public class Clientes {
+	
+	//Atributos
+	
+	String nomeCliente;
+	String localidadeCliente;
+	String generoCliente;
+	static ArrayList<String> baseDados = new ArrayList<String>();
+	
+
+	//metodos
+	
+	public void GuardarDadosClientes(String nome, String localidade, String genero) 
+	{
+		this.nomeCliente = nome;
+		this.localidadeCliente = localidade;
+		this.generoCliente = genero;
+		
+		String linha = this.nomeCliente + ";" + this.localidadeCliente + ";" + this.generoCliente;
+		
+		baseDados.add(linha);
+		
+		
+	}
+	
+	
+	public void TotalClientesGuardados() 
+	{
+		JOptionPane.showMessageDialog(null, "Estão guardados até o momento " + baseDados.size() + " clientes.");
+	}
+	
+	
+	public Clientes() {
+		// TODO Auto-generated constructor stub
+	}
+
+}
+
+
